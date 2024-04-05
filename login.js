@@ -25,3 +25,63 @@ document.addEventListener('DOMContentLoaded', function() {
         showLogin.style.display = 'none';
     });
 });
+
+// Get the email field and the warning container
+var emailField = document.getElementById('register-username');
+
+// Add an event listener for the blur event of the email field
+emailField.addEventListener('blur', function() {
+    // Clear the warning container
+    warningContainer.innerHTML = '';
+
+    // Validate the email domain
+    var email = emailField.value;
+    if (!email.endsWith('@connect.hku.hk')) {
+        var warning = document.getElementById('register-warning');
+        warning.textContent = 'Please enter a valid HKU @connect email address.';
+    }
+});
+
+// Get the login form and add an event listener for the submit event
+var loginForm = document.getElementById('login-form');
+loginForm.addEventListener('submit', function(event) {
+    // Clear the warning container
+    warningContainer.innerHTML = '';
+
+    // Check if all required fields are filled
+    var email = emailField.value;
+    var password = document.getElementById('login-password').value;
+    if (!email) {
+        var warning = document.getElementById('login-warning');
+        warning.textContent = 'Missing Email Address!!';
+        // Prevent the form submission
+        event.preventDefault();
+    }
+    if (!password) {
+        var warning = document.getElementById('login-warning');
+        warning.textContent = 'Please provide the password';
+        // Prevent the form submission
+        event.preventDefault();
+    }
+});
+
+var registerForm = document.getElementById('register-form');
+registerForm.addEventListener('submit', function(event) {
+    warningContainer.innerHTML = '';
+
+    // Check if all required fields are filled
+    var email = emailField.value;
+    var password = document.getElementById('login-password').value;
+    if (!email) {
+        var warning = document.getElementById('login-warning');
+        warning.textContent = 'Missing Email Address!!';
+        // Prevent the form submission
+        event.preventDefault();
+    }
+    if (!password) {
+        var warning = document.getElementById('login-warning');
+        warning.textContent = 'Please provide the password';
+        // Prevent the form submission
+        event.preventDefault();
+    }
+});
