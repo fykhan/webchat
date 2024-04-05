@@ -1,0 +1,89 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+#header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 20px 0;
+    background-color: #f0f0f0;
+    text-align: center;
+    border: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    position: absolute;
+    top:30%;
+    margin: 0;
+    padding: 0;
+}
+
+#header h1 {
+    padding: 20px;
+    margin: 0;
+    text-align: left;
+}
+
+
+
+.form-container {
+    margin-top: 0;
+    display: none;
+    width: 300px;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid black;
+    margin-top: 80px; /* Adjust this value as needed */
+    position: relative; /* Added to position the pseudo-element */
+}
+
+:root {
+    --form-title: "Login";
+}
+
+.form-container::before {
+    content: var(--form-title);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background: white;
+    padding: 0 5px;
+}
+
+.form-container.register::before {
+    content: "Register";
+        position: absolute;
+    top: -10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    background: white; /* Same as the form background */
+    padding: 0 5px; /* Padding around the title */
+}
+
+/* Show the active form */
+.form-container.active {
+    display: block;
+}
+
+/* Form styles */
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form field styles */
+.form-container form label,
+.form-container form input {
+    margin-bottom: 10px;
+}
+
+.form-container form input[type="submit"] {
+    margin-top: 20px;
+}
