@@ -11,29 +11,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        // Prepare a SQL statement to select the user with the provided username
-        $query = 'SELECT * FROM account WHERE useremail ="'.$email.'"';
-        $result = mysqli_query($dbconn, $query) or die('Query failed: ' . mysqli_error($dbconn));
-        // print_r($query);
-        if (mysqli_num_rows($result) > 0) {
-            if ($password === mysqli_fetch_assoc($result)['password']) {
-                session_start();
-                $_SESSION['email'] = $email;
-                header('Location: chat.php');
-            } else {
-                $error = 'Failed to Login. Incorrect password!!';
-            }
+        if (empty($email) || empty($password)) {
+            $error = 'Failed to Login. Email and password are required!!';
+            
         }
         else {
-            $error = 'Failed to Login. Unknown user!!';
+            $query = 'SELECT * FROM account WHERE useremail ="'.$email.'"';
+            $result = mysqli_query($dbconn, $query) or die('Query failed: ' . mysqli_error($dbconn));
+            // print_r($query);
+            if (mysqli_num_rows($result) > 0) {
+                if ($password === mysqli_fetch_assoc($result)['password']) {
+                    session_start();
+                    $_SESSION['email'] = $email;
+                    header('Location: chat.php');
+                } else {
+                    $error = 'Failed to Login. Incorrect password!!';
+                }
+            }
+            else {
+                $error = 'Failed to Login. Unknown user!!';
+            }
         }
-    } else {
-        if ($_POST['type'] === 'register') {
-            // Get the username and password from the POST data
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-
-            // Prepare a SQL statement to insert the new user into the database
+    } 
+    if ($_POST['type'] === 'register') {
+        // Get the username and password from the POST data
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        // Prepare a SQL statement to insert the new user into the database
+        if (empty($email) || empty($password)) {
+            $error = 'Failed to Register. Email and password are required!!';
+        }
+        else {
             $query = 'INSERT INTO account (useremail, password) VALUES ("'.$email.'", "'.$password.'")';
             $result = mysqli_query($dbconn, $query) or die('Query failed: ' . mysqli_error($dbconn));
             // print_r($query);
