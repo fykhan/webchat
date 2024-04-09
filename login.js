@@ -36,19 +36,39 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Get the email field and the warning container
-var emailField = document.getElementById('register-username');
+var emailField = document.getElementById('login-username');
+// Add an event listener for the blur event of the email field    
+var warning = document.getElementById('login-warning');  
 
-// Add an event listener for the blur event of the email field
-emailField.addEventListener('blur', function() {
+emailField.addEventListener('focus', function() {
+    warning.innerHTML = '';
+});
+
+emailField.addEventListener('blur', async function() {
     // Clear the warning container
-    var warningContainer = document.getElementById('register-warning');  
-    warningContainer.innerHTML = '';
-
+    warning.innerHTML = '';
     // Validate the email domain
     var email = emailField.value;
-    if (!email.endsWith('@connect.hku.hk')) {
-        var warning = document.getElementById('register-warning');
+    if (!email) {
+        warning.textContent = 'Missing Email Address!!';
+    } else if (!email.endsWith('@connect.hku.hk')) {
         warning.textContent = 'Please enter a valid HKU @connect email address.';
+    } 
+    else{try {
+            const bodyData = 'check.php?email=' + encodeURIComponent(email);
+            const response = await fetch(bodyData, {method: 'GET'});
+            const data = await response.json(); // This is the parsed JSON
+            console.log(data); // Log the parsed JSON to the console
+            if (data.success) {
+                if (data.found) {
+                    warning.innerHTML = "";
+                } else {
+                    warning.innerHTML = "Cannot find your email record";
+                }
+            }
+        } catch(err) {
+            console.log('Error when checking the email:', err);
+        }
     }
 });
 
@@ -56,6 +76,7 @@ emailField.addEventListener('blur', function() {
 var loginForm = document.getElementById('login-form');
 loginForm.addEventListener('submit', function(event) {
     // Clear the warning container
+    var warningContainer = document.getElementById('login-warning');
     warningContainer.innerHTML = '';
 
     // Check if all required fields are filled
@@ -75,10 +96,10 @@ loginForm.addEventListener('submit', function(event) {
     }
 });
 
-var registerForm = document.getElementById('register-form');
-registerForm.addEventListener('submit', function(event) {
-    var warningContainer = document.getElementById('register-warning');  
-    warningContainer.innerHTML = '';
+var loginForm = document.getElementById('login-form');
+loginForm.addEventListener('submit', function(event) {
+    var warning = document.getElementById('login-warning');  
+    warning.innerHTML = '';
 
     // Check if all required fields are filled
     var email = emailField.value;
@@ -93,4 +114,73 @@ registerForm.addEventListener('submit', function(event) {
         // Prevent the form submission
         event.preventDefault();
     }
+});
+
+// Get the register form fields and the warning container
+var registerEmailField = document.getElementById('register-username');
+var registerPasswordField = document.getElementById('register-password');
+var registerConfirmField = document.getElementById('confirm-password');
+var registerWarning = document.getElementById('register-warning');
+
+// Clear the warning when the email field is focused
+registerEmailField.addEventListener('focus', function() {
+    registerWarning.innerHTML = '';
+});
+
+// Clear the warning when the password field is focused
+// Add an event listener for the blur event of the email field
+registerEmailField.addEventListener('blur', async function() {
+    // Clear the warning container
+    console.log("blur");
+    registerWarning.innerHTML = '';
+
+    // Validate the email domain
+    var email = registerEmailField.value;
+    if (!email) {
+        registerWarning.textContent = 'Missing Email Address!!';
+    } else if (!email.endsWith('@connect.hku.hk')) {
+        registerWarning.textContent = 'Please enter a valid HKU @connect email address.';
+    } else{
+        try {
+            const bodyData = 'check.php?email=' + encodeURIComponent(email);
+            const response = await fetch(bodyData, {method: 'GET'});
+            const data = await response.json(); // This is the parsed JSON
+            console.log(data); // Log the parsed JSON to the console
+            if (data.success) {
+                if (data.found) {
+                    registerWarning.innerHTML = "You have registered before!!";
+                } else {
+                    registerWarning.innerHTML = "";
+                }
+            }
+        } catch(err) {
+            console.log('Error when checking the email:', err);
+        }
+    
+    }
+});
+
+// Add an event listener for the blur event of the password field
+registerPasswordField.addEventListener('blur', function() {
+    // Clear the warning container
+    registerWarning.innerHTML = '';
+
+    // Validate the password
+    var password = registerPasswordField.value;
+    if (!password) {
+        registerWarning.textContent = 'Missing Password!!';
+    } 
+});
+
+// Add an event listener for the blur event of the confirm password field
+registerConfirmField.addEventListener('blur', function() {
+    // Clear the warning container
+    registerWarning.innerHTML = '';
+
+    // Validate the confirm password
+    var password = registerPasswordField.value;
+    var confirmPassword = registerConfirmField.value;
+    if (password !== confirmPassword) {
+        registerWarning.textContent = 'Passwords do not match!!';
+    } 
 });

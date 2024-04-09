@@ -32,7 +32,11 @@ h2 {
     text-align: left;
 }
 
-
+.error {
+    background-color: yellow;
+    color: red;
+    width: max-content;
+}
 
 .form-container {
     margin-top: 0;
