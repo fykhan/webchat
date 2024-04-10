@@ -121,6 +121,8 @@ var registerEmailField = document.getElementById('register-username');
 var registerPasswordField = document.getElementById('register-password');
 var registerConfirmField = document.getElementById('confirm-password');
 var registerWarning = document.getElementById('register-warning');
+const registerForm = document.getElementById('register-form');
+
 
 // Clear the warning when the email field is focused
 registerEmailField.addEventListener('focus', function() {
@@ -183,4 +185,38 @@ registerConfirmField.addEventListener('blur', function() {
     if (password !== confirmPassword) {
         registerWarning.textContent = 'Passwords do not match!!';
     } 
+});
+
+registerForm.addEventListener('submit', function(event) {
+    // Clear the warning container
+    registerWarning.innerHTML = '';
+
+    // Validate the confirm password
+    var password = registerPasswordField.value;
+    var confirmPassword = registerConfirmField.value;
+    if (password !== confirmPassword) {
+        registerWarning.textContent = 'Passwords do not match!!';
+    } 
+});
+
+loginForm.addEventListener('submit', function(event) {
+    const loginWarning = document.getElementById('login-warning');
+    
+    // Check if the register-warning is not empty
+    if (loginWarning.textContent.trim() !== '') {
+        // If the register-warning is not empty, prevent the form submission
+        console.log("warning");
+        event.preventDefault();
+    }
+});
+
+registerForm.addEventListener('submit', function(event) {
+    const registerWarning = document.getElementById('register-warning');
+    
+    // Check if the register-warning is not empty
+    if (registerWarning.textContent.trim() !== '') {
+        // If the register-warning is not empty, prevent the form submission
+        console.log("warning");
+        event.preventDefault();
+    }
 });

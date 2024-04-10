@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f0f0f0;
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#chat-container {
+    max-width: 400px;
+    margin: 20px;
+    background-color:rgb(139, 206, 206);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    position: relative;
+}
+
+#message-window {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Add this line for equal spacing between messages */
+    background-color: white;
+    margin-top: 30px;
+    border: 1px solid #ac2121;
+    height: 500px;
+    padding-top: 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+#input-area {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #01af78;
+    background-color: rgb(144, 249, 214);
+    display: flex;
+    justify-content: space-between;
+}
+
+#input-area input {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+#logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+#chat-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#input-area {
+    display: flex;
+    justify-content: space-between;
+}
+
+#message-input {
+    margin-right: 10px;
+}
+
+.message-right, .message-left {
+
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block; /* Add this line */
+
+}
+
+.message-right {
+    background-color: #d4edda;
+    align-self: flex-end;
+}
+
+.message-left {
+    background-color: #f8d7da;
+    align-self: flex-start;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.time {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.content {
+    margin-top: 5px;
+}
