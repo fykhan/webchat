@@ -45,8 +45,8 @@ h2 {
     padding: 20px;
     border-radius: 5px;
     border: 2px solid black;
-    margin-top: 80px; /* Adjust this value as needed */
-    position: relative; /* Added to position the pseudo-element */
+    margin-top: 80px; 
+    position: relative;
 }
 
 :root {
@@ -65,24 +65,21 @@ h2 {
 .form-container.register::before {
     content: "Register";
         position: absolute;
-    top: -10px; /* Adjust as needed */
-    left: 10px; /* Adjust as needed */
-    background: white; /* Same as the form background */
-    padding: 0 5px; /* Padding around the title */
+    top: -10px;
+    left: 10px;
+    background: white;
+    padding: 0 5px;
 }
 
-/* Show the active form */
 .form-container.active {
     display: block;
 }
 
-/* Form styles */
 .form-container form {
     display: flex;
     flex-direction: column;
 }
 
-/* Form field styles */
 .form-container form label,
 .form-container form input {
     margin-bottom: 10px;

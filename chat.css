@@ -24,7 +24,7 @@ header {
 #message-window {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Add this line for equal spacing between messages */
+    gap: 10px;
     background-color: white;
     margin-top: 30px;
     border: 1px solid #ac2121;
@@ -78,7 +78,7 @@ body {
     margin: 10px;
     padding: 10px;
     border-radius: 5px;
-    display: inline-block; /* Add this line */
+    display: inline-block;
 
 }
 
