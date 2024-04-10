@@ -7,7 +7,7 @@ window.onload = function() {
         fetch('chatmsg.php')
             .then(response => response.json())
             .then(data => {
-                messageWindow.innerHTML = ''; // Clear the message window
+                messageWindow.innerHTML = ''; 
                 const messages = Array.isArray(data.messages) ? data.messages : [];
                 for (let i = 0; i < messages.length; i++) {
                     const message = messages[i];
@@ -35,25 +35,22 @@ window.onload = function() {
             })
             .then(response => response.json())
             .then(data => {
-                // Call fetchMessages function to update the chatbox with the new message
                 fetchMessages();
             })
             .catch(error => console.error('Error:', error));
         }
     });
 
-    fetchMessages(); // Fetch the messages when the page loads
+    fetchMessages(); 
 };
 
-// Get the message window element
 var messageWindow = document.getElementById('message-window');
 
-// Function to fetch the latest messages
 function fetchMessages() {
     fetch('chatmsg.php')
         .then(response => response.json())
         .then(data => {
-            messageWindow.innerHTML = ''; // Clear the message window
+            messageWindow.innerHTML = '';
             const messages = Array.isArray(data.messages) ? data.messages : [];
             for (let i = 0; i < messages.length; i++) {
                 const message = messages[i];
@@ -68,14 +65,10 @@ function fetchMessages() {
             messageWindow.scrollTop = messageWindow.scrollHeight;
         }
     );}
-// Fetch the messages every 5 seconds
 setInterval(fetchMessages, 5000);
 
-// Get the logout button
 var logoutButton = document.getElementById('logout-button');
 
-// Add a click event listener to the logout button
 logoutButton.addEventListener('click', function() {
-    // Redirect to the logout URL
     window.location.href = 'login.php?action=signout';
 });

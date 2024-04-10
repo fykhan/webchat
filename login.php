@@ -1,14 +1,10 @@
 <?php
-    // Check if the action parameter is set and equals signout
     if (isset($_GET['action']) && $_GET['action'] === 'signout') {
-        // Unset all of the session variables
         $_SESSION = array();
-        // Redirect to login page
         header("location: login.php");
         exit;
     }
 
-    // Connect to the database
     $dbconn = mysqli_connect('mydb', 'dummy', 'c3322b', 'db3322') or die('Could not connect: ' . mysqli_error($dbconn));
     unset($error);
     $loginerror = null;
@@ -17,14 +13,11 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($_POST['type'] === 'login') {
-            // Get the username and password from the POST data
             $email = $_POST['user'];
             $password = $_POST['password'];
 
-            // Prepare a SQL statement to select the user with the provided username
             $query = 'SELECT * FROM account WHERE useremail ="'.$email.'"';
             $result = mysqli_query($dbconn, $query) or die('Query failed: ' . mysqli_error($dbconn));
-            // print_r($query);
             if (mysqli_num_rows($result) > 0) {
                 if ($password === mysqli_fetch_assoc($result)['password']) {
         session_start();
@@ -40,11 +33,9 @@
             }
         } else {
             if ($_POST['type'] === 'register') {
-                // Get the username and password from the POST data
                 $email = $_POST['user'];
                 $password = $_POST['password'];
                 
-                // Prepare a SQL statement to check if the email already exists
                 $query = 'SELECT * FROM account WHERE useremail = "'.$email.'"';
                 $result = mysqli_query($dbconn, $query) or die('Query failed: ' . mysqli_error($dbconn));
                 

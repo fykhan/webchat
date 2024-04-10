@@ -16,7 +16,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query = "INSERT INTO message (time, message, person) VALUES ('".$time."', '".$message."', '".$user."')";
         $result = mysqli_query($dbconn, $query);
         if ($result) {
-            // Fetch the latest messages after inserting a new message
             $query = "SELECT * FROM message WHERE time > " . (time() - 3600);
             $result = mysqli_query($dbconn, $query);
             $messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
